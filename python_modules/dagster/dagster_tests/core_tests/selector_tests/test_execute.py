@@ -12,7 +12,7 @@ from .test_subset_selector import foo_job, get_asset_selection_job
 
 def test_subset_for_execution():
     recon_job = reconstructable(foo_job)
-    sub_job = recon_job.subset_for_execution(["*add_nums"], asset_selection=None)
+    sub_job = recon_job.subset_for_execution(["*add_nums"])
 
     assert sub_job.solid_selection == ["*add_nums"]
     assert sub_job.solids_to_execute is None
@@ -30,7 +30,7 @@ def test_subset_for_execution():
 def test_asset_subset_for_execution():
     recon_job = reconstructable(get_asset_selection_job)
     sub_job = recon_job.subset_for_execution(
-        solid_selection=None, asset_selection=frozenset({AssetKey("my_asset")})
+        solid_selection=None, asset_selection={AssetKey("my_asset")}
     )
     assert sub_job.asset_selection == {AssetKey("my_asset")}
 
